@@ -1,0 +1,11 @@
+{
+  "name": "nexiby/redeemer-appsumo-edd",
+  "description": "Redeem AppSumo promo codes and auto-issue Easy Digital Downloads (EDD) licenses.",
+  "type": "wordpress-plugin",
+  "autoload": {
+    "psr-4": {
+      "REDEASEDD\\RedeemerAppSumoEDD\\": "src/"
+    }
+  },
+  "require": {}
+}
