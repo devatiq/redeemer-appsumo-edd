@@ -8,6 +8,7 @@ use REDEASEDD\RedeemerAppSumoEDD\Frontend\Shortcode;
 use REDEASEDD\RedeemerAppSumoEDD\Infrastructure\Options;
 use REDEASEDD\RedeemerAppSumoEDD\Services\LocalStoreVerifier;
 use REDEASEDD\RedeemerAppSumoEDD\Services\EDDService;
+use REDEASEDD\RedeemerAppSumoEDD\Admin\DashboardWidget;
 
 class Plugin
 {
@@ -33,5 +34,6 @@ class Plugin
             new LocalStoreVerifier(new Options()),
             new EDDService()
         ))->register();
+        DashboardWidget::register();
     }
 }
