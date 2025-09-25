@@ -26,24 +26,24 @@ class SettingsPage
             'default' => $opts->defaults(),
         ]);
 
-        add_settings_section('rae_main', __('General', 'redeemer-appsumo-edd'), '__return_false', 'redeemer-appsumo-edd');
+        add_settings_section('redeasedd_main', __('General', 'redeemer-appsumo-edd'), '__return_false', 'redeemer-appsumo-edd');
 
         add_settings_field('webhook_secret', __('Webhook/REST Secret', 'redeemer-appsumo-edd'), function () use ($opts) {
             $v = $opts->get()['webhook_secret'] ?? '';
             printf('<input type="text" class="regular-text" name="%s[webhook_secret]" value="%s" />', esc_attr($opts->key()), esc_attr($v));
             echo '<p class="description">Provide in requests as <code>Authorization: Bearer &lt;secret&gt;</code>.</p>';
-        }, 'redeemer-appsumo-edd', 'rae_main');
+        }, 'redeemer-appsumo-edd', 'redeasedd_main');
 
         add_settings_field('download_id', __('EDD Download ID', 'redeemer-appsumo-edd'), function () use ($opts) {
             $v = (int) ($opts->get()['download_id'] ?? 0);
             printf('<input type="number" min="1" name="%s[download_id]" value="%d" />', esc_attr($opts->key()), $v);
-        }, 'redeemer-appsumo-edd', 'rae_main');
+        }, 'redeemer-appsumo-edd', 'redeasedd_main');
 
         add_settings_field('allowed_price_ids', __('Allowed Price IDs (CSV)', 'redeemer-appsumo-edd'), function () use ($opts) {
             $v = esc_attr( implode(',', array_map('intval', (array) ($opts->get()['allowed_price_ids'] ?? []))) );
             printf('<input type="text" class="regular-text" name="%s[allowed_price_ids]" value="%s" />', esc_attr($opts->key()), $v);
             echo '<p class="description">Example: <code>1,2</code></p>';
-        }, 'redeemer-appsumo-edd', 'rae_main');
+        }, 'redeemer-appsumo-edd', 'redeasedd_main');
 
         add_settings_field('infer_tier', __('Infer Tier from Code Prefix', 'redeemer-appsumo-edd'), function () use ($opts) {
             $v = ! empty($opts->get()['infer_tier']);
@@ -52,13 +52,13 @@ class SettingsPage
                 checked(true, $v, false),
                 esc_html__('If code starts with AS-1- or AS-2-, use 1 or 2 as price_id.', 'redeemer-appsumo-edd')
             );
-        }, 'redeemer-appsumo-edd', 'rae_main');
+        }, 'redeemer-appsumo-edd', 'redeasedd_main');
 
         add_settings_field('codes_store', __('Seed Codes (one per line: CODE|PRICE_ID)', 'redeemer-appsumo-edd'), function () use ($opts) {
             $v = (string) ($opts->get()['codes_store'] ?? '');
             printf('<textarea name="%s[codes_store]" class="large-text code" rows="8">%s</textarea>', esc_attr($opts->key()), esc_textarea($v));
             echo '<p class="description">Example: <code>AS-1-ABCDE12345|1</code></p>';
-        }, 'redeemer-appsumo-edd', 'rae_main');
+        }, 'redeemer-appsumo-edd', 'redeasedd_main');
     }
 
     public static function render(): void

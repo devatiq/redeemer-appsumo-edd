@@ -3,8 +3,8 @@ namespace REDEASEDD\RedeemerAppSumoEDD\Infrastructure;
 
 class Options
 {
-    private string $key   = 'rae_options';
-    private string $group = 'rae_group';
+    private string $key   = 'redeasedd_options';
+    private string $group = 'redeasedd_group';
 
     public function key(): string { return $this->key; }
     public function group(): string { return $this->group; }

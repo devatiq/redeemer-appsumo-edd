@@ -17,7 +17,7 @@ class RedeemController
 
     public function register_routes(): void
     {
-        register_rest_route('rae/v1', '/redeem', [
+        register_rest_route('redeasedd_/v1', '/redeem', [
             'methods'             => 'POST',
             'callback'            => [ $this, 'redeem' ],
             'permission_callback' => '__return_true',

@@ -15,13 +15,14 @@ class AjaxController
 
     public function register(): void
     {
-        add_action('wp_ajax_rae_redeem',        [$this, 'handle']);
-        add_action('wp_ajax_nopriv_rae_redeem', [$this, 'handle']);
+        add_action('wp_ajax_redeasedd_redeem',        [$this, 'handle']);
+        add_action('wp_ajax_nopriv_redeasedd_redeem', [$this, 'handle']);
     }
 
     public function handle(): void
     {
-        if ( ! wp_verify_nonce( $_POST['_wpnonce'] ?? '', 'rae-redeem' ) ) {
+        // Nonce check must match Shortcode::assets() => 'redeasedd_redeem'
+        if ( ! wp_verify_nonce( $_POST['_wpnonce'] ?? '', 'redeasedd_redeem' ) ) {
             wp_send_json( ['error'=>'Invalid nonce'], 403 );
         }
 
@@ -42,7 +43,6 @@ class AjaxController
             wp_send_json(['error'=>'Invalid price_id'], 400);
         }
 
-        // Verify using the same service as the REST route (local store or API)
         $verify = $this->verifier->verify($code, $price_id ?: null);
         if ( empty($verify['valid']) ) {
             wp_send_json(['error'=> $verify['message'] ?? 'Invalid code'], 400);
@@ -55,7 +55,6 @@ class AjaxController
         if ( ! $paymentId ) wp_send_json(['error'=>'Failed to create payment'], 500);
 
         $this->verifier->markUsed($code, $email, $paymentId);
-
         $licenses = $this->edd->getPaymentLicenses($paymentId);
 
         wp_send_json([

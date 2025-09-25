@@ -22,7 +22,7 @@ EDD Software Licensing generates the license automatically.
    - (Optional) Seed codes in “Seed Codes” as CODE|PRICE_ID (one per line).
    - (Optional) Enable “Infer Tier from Code Prefix” (AS-1-..., AS-2-...).
 3) REST endpoint:
-   POST /wp-json/rae/v1/redeem
+   POST /wp-json/redeasedd/v1/redeem
    Headers: Authorization: Bearer YOUR_SECRET
    Body JSON:
      {
